@@ -1,0 +1,210 @@
+<script src="../js/login.js"></script>
+<script type="text/javascript">
+	window.onpaint = redirectLoggedUser();
+</script>
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<!-- Jquey -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<link rel="shortcut icon" href="../images/ifpb.ico" />
+
+	<title>CMSTI</title>
+
+	<style>
+		body {
+			background-image: url("../images/background_100.png");
+			background-size: 500px;
+		}
+
+		.container {
+			min-height: 100%;
+			min-height: 100vh;
+			padding-bottom: 4.0rem;
+			display: flex;
+			flex-flow: column;
+			align-items: center;
+		}
+
+		.avatar img {
+			height: 125px;
+
+		}
+
+		.card,
+		.alert {
+			border-radius: 20px;
+			min-width: 12rem;
+			width: 22rem;
+		}
+
+		.card-content {
+			padding-top: 3.5rem;
+			margin-right: 0.8rem;
+		}
+
+		.rounded {
+			border-radius: 20px !important;
+		}
+
+		.input-group-prepend span {
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+			color: #28a745;
+			background-color: #FFFFFF;
+			border-color: #FFFFFF;
+		}
+
+		.input-group input {
+			border-top-right-radius: 20px;
+			border-bottom-right-radius: 20px;
+			border: 0px;
+		}
+
+		.input-group input:focus {
+			outline: none !important;
+			box-shadow: none;
+		}
+
+		.focused_prepend {
+			outline: none !important;
+			box-shadow: 0 0 10px #28a745;
+		}
+
+		.pt-3 {
+			padding-top: 2rem !important;
+		}
+
+		footer {
+			position: relative;
+			height: 4.0rem;
+			margin-top: -4.0rem;
+			width: 100%;
+			bottom: 0;
+		}
+
+		@media (max-width: 375px){
+			.card{
+				width: 18rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container justify-content-center">
+
+		<div id="alert" role="alert"></div>
+
+		<div class="card bg-dark text-white text-center shadow-sm">
+
+			<div class="card-body">
+
+				<div class="avatar">
+					<img src="../images/avatar.png" alt="AVATAR">
+					<h5 class="card-title pt-3">
+						CMSTI
+					</h5>
+				</div>
+				<form id="loginForm" action="" method="">
+					<div class="input-group pt-3">
+						<div class="input-group-prepend">
+							<span id="email_prepend" class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input id="email" name="email" type="text" class="form-control" placeholder="Email" required>
+					</div>
+
+					<div class="input-group pt-3">
+						<div class="input-group-prepend">
+							<span id="password_prepend" class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+					</div>
+
+					<div class="pt-3">
+						<button type="submit" name="login" class="col rounded btn btn-outline-success">Login</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+	<footer class="text-muted text-center">
+		<div>Copyright 2020 &COPY;CMSTI-JP</div>
+		<div>Powered by <a href="https://facebook.com/angeloplacebo/">@angeloplacebo</a></div>
+		</div>
+	</footer>
+
+
+	<script>
+		
+		updateAlert()
+		redirectLoggedUser()
+
+		$('#password').on({
+			focus: function () {
+				$('#password_prepend').addClass('focused_prepend');
+			},
+			blur: function () {
+				$('#password_prepend').removeClass('focused_prepend');
+			}
+		});
+
+		$('#email').on({
+			focus: function () {
+				$('#email_prepend').addClass('focused_prepend');
+			},
+			blur: function () {
+				$('#email_prepend').removeClass('focused_prepend');
+			}
+		});
+
+		var btLogin = document.querySelector('button[name=login')
+		btLogin.addEventListener('click', (event) => {
+
+			var loginForm = document.querySelector('#loginForm')
+
+			if (loginForm.checkValidity()) {
+
+				event.preventDefault()
+				var email = document.querySelector('input[name=email').value
+				var password = document.querySelector('input[name=password').value
+
+				let data = {
+					email,
+					password
+				}
+
+				login(data)
+			}
+
+		})
+	</script>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

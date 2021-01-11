@@ -1,0 +1,122 @@
+<script src="../js/login.js"></script>
+<script type="text/javascript">
+	window.onpaint = redirectUnloggedUser();
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Jquery  -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Main JS File -->
+    <script src="../js/main.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/master.css">
+    <!-- SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/master.css">
+    <!-- JavaScript Files -->
+    <script src="../js/swal.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/search.js"></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../images/ifpb.ico" />
+
+    <title>CMSTI HD Management</title>
+
+</head>
+
+<body>
+
+    <navbar class="navbar">
+        <div class="ml-auto" style="display: flex;">
+            <a class="nav-link" href="#" onclick="location.href='home.html'"><i class="fas fa-home"></i></a>
+            <a class="nav-link" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i></a>
+            <div class="nav-link custom-control custom-switch" style="margin-left: 1.8rem;">
+                <input type="checkbox" class="custom-control-input" onchange="(themeToggle())" id="thememode">
+                <label class="custom-control-label" for="thememode"> Dark Mode</label>
+            </div>
+        </div>
+    </navbar>
+
+    <h1 class="display-4 text-center">CMSTI<span
+            class="badge badge-secondary badge-success" style="font-size:25%; vertical-align:top">tool</span>- HD
+        MANAGEMENT</h1>
+    <p></p>
+
+    <div class="container spacer">
+
+        <form onSubmit="start();return false;" class="form-inline col-auto mx-auto justify-content-center">
+
+            <div class="input-group mx-auto col mb-2 w-50">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" id="btn_filter"
+                        aria-haspopup="true" aria-expanded="true"><i class="fas fa-filter"></i></button>
+                    <div id="dd" class="dropdown-menu">
+                        <div class="switch custom-switch">
+                            <input type="checkbox" class="custom-control-input" onchange="toggle('hd')" id="hd">
+                            <label class="custom-control-label" for="hd">HD</label>
+                        </div>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" onchange="toggle('img-bkp')"
+                                id="img-bkp">
+                            <label class="custom-control-label" for="img-bkp">Imagem/Backup</label>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="text" class="form-control" id="word" placeholder="Escreva algo como LAB_XX, SG-XX or XX">
+                <div class="input-group-append">
+                    <span type="button" class="btn btn-dark" id="btn_search" onclick="start()">Buscar</span>
+                </div>
+            </div>
+
+        </form>
+        <p></p>
+
+        <div id="data"></div>
+    <script>
+        var dropdown = document.getElementById('dd')
+        dropdown.addEventListener('click', (event)=>{
+            event.stopPropagation()
+        })
+    </script>
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer" style="font-size:14px;">
+        <!-- Copyright -->
+        <div class="footer-copyright text-muted text-center pb-3">
+            <span>Copyright 2020 &COPY;CMSTI-JP</span>
+            </br>
+            <span>Powered by <a href="https://facebook.com/angeloplacebo/">@angeloplacebo</a></span>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        
+</body>
+
+</html>

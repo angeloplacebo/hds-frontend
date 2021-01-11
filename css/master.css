@@ -1,0 +1,59 @@
+body {
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url("../images/background_20.png");
+    background-size: 400px;
+}
+.spacer {
+    flex: 1;
+}
+footer{
+    font-size: 14px;
+    bottom:0; 
+    width:100%; 
+    height:60px; 
+}
+
+.swal-modal .swal-text {
+    text-align: center;
+    display: inline-table;
+}
+
+.table td, .table th {
+    border-top: 0px solid #dee2e6;
+}
+.dark{
+    background-color: #343a40;
+    color: #e1e1ff;
+}
+
+.swal-footer{
+    text-align: center;
+}
+
+.swal-modal .swal-text {
+    text-align: center;
+}
+
+.input-group-prepend .dropdown-menu .custom-switch{
+    padding-left: 3.0rem;
+}
+.input-group-prepend .dropdown-menu .custom-switch label{
+    display: inline;
+}
+
+.dropdown-menu{
+    min-width: 11rem;
+}
+
+@media (max-width:520px) {
+    .display-4 {
+      font-size: 2rem !important;
+    }
+  
+    .btn {
+      line-height: 1.2rem;
+    }
+  }

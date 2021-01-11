@@ -1,0 +1,259 @@
+<script src="../js/login.js"></script>
+<script type="text/javascript">
+	window.onpaint = redirectUnloggedUser();
+</script>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="../css/master.css">
+
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Jquery  -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+	<!-- SweetAlert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- JavaScript Files -->
+	<script src="../js/swal.js"></script>
+	<script src="../js/theme.js"></script>
+	<script src="../js/insert.js"></script>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="../images/ifpb.ico" />
+
+	<title>CMSTI HD Management</title>
+	<style>
+		body {
+			margin: 0;
+			border: 0;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+		}
+
+		input[type=submit] {
+			margin-top: 0.5rem;
+		}
+
+		.ml-auto {
+			display: flex;
+		}
+
+		.custom-switch {
+			margin-left: 1.8rem;
+		}
+
+		.display-4 {
+			font-size: 3rem !important;
+		}
+
+		.badge {
+			font-size: 25%;
+			vertical-align: top
+		}
+
+		.menu {
+			margin-bottom: 0.7rem;
+		}
+
+		@media (max-width:520px) {
+			.display-4 {
+				font-size: 2rem !important;
+			}
+
+			.btn {
+				line-height: 1.2rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<navbar class="navbar">
+		<div class="ml-auto">
+
+			<a class="nav-link" href="#" onclick="location.href='home.html'"><i class="fas fa-home"></i></a>
+			<a class="nav-link" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i></a>
+
+			<div class="nav-link custom-control custom-switch">
+				<input type="checkbox" class="custom-control-input" onchange="(themeToggle())" id="thememode">
+				<label class="custom-control-label" for="thememode"> Dark Mode</label>
+			</div>
+		</div>
+	</navbar>
+
+		<h1 class="display-4 text-center">CMSTI<span class="badge badge-secondary badge-success">tool</span>- HD
+			MANAGEMENT</h1>
+
+	<div class="container spacer">
+		<div class="text-center">
+			<div class="menu">
+				<div class="row" style="display: inline-flex;">
+					<div class="col-auto">
+						<input type="submit" class="btn btn-success" name="Add" value="Inserir"></input>
+					</div>
+					<div class="col-auto">
+						<input type="submit" class="btn btn-danger" name="Rem" value="Remover"></input>
+					</div>
+					<div class="col-auto">
+						<input type="submit" class="btn btn-primary" name="Search" value="Buscar"></input>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="addmenu"></div>
+
+	</div>
+
+	<script>
+
+		var btAdd = document.querySelector('input[name=Add]')
+		btAdd.addEventListener('click', (event) => {
+			event.preventDefault()
+			var addMenuDiv = document.querySelector('#addmenu')
+
+			addMenuDiv.innerHTML = `
+				<div class="text-center">
+					<input type="submit" class="btn btn-success mr-4" name="hd" value="HD"></input>
+					<input type="submit" class="btn btn-success mr-4" name="imgbkp" value="Imagem/Backup"></input>
+				</div>`
+
+			var btAddHd = document.querySelector('input[name=hd]')
+			var btAddImg = document.querySelector('input[name=imgbkp]')
+
+			btAddHd.addEventListener('click', () => {
+				addMenuDiv.innerHTML = `
+					<form class="form" style="display:block">
+						<input name="tag" type="text" class="form-control"" placeholder="Tag do HD como SG-01" required>
+						<p></p>
+						<input name="ns" type="text" class="form-control" placeholder="SN = Número de Série" required>
+						<p></p>
+						<input name="pn" type="text" class="form-control" placeholder="PN = Número Pin" required>
+						<p></p>
+						<input name="size" type="text" class="form-control" placeholder="Capacidade do disco como 1 TB" required>
+						<p></p>
+						<input name="fab" type="text" class="form-control" placeholder="Fabricante como Seagate ou Western Digital" required>
+						<p></p>
+						<input name="loc" type="text" class="form-control" placeholder="Local como Supervisão" required>
+						<p></p>
+						<input name="model" type="text" class="form-control mr-2" placeholder="Modelo como Expansion - Desktop Drive" required>
+						<p></p>
+						<input type="submit" class="btn btn-outline-success " name="insertHd" value="Adicionar"></input>
+					</form>
+				`
+
+				checkTheme()
+
+				var btInsertImg = document.querySelector('input[name=insertHd')
+				btInsertImg.addEventListener('click', (event) => {
+
+					var hdForm = document.querySelector('form')
+					if (hdForm.checkValidity()) {
+						event.preventDefault()
+
+						let data = {
+							"Fabricante": document.querySelector('input[name=fab]').value,
+							"Modelo": document.querySelector('input[name=model]').value,
+							"TAG": document.querySelector('input[name=tag]').value,
+							"PN": document.querySelector('input[name=pn]').value,
+							"SN": document.querySelector('input[name=ns]').value,
+							"Capacidade": document.querySelector('input[name=size]').value,
+							"Local": document.querySelector('input[name=loc]').value
+						}
+						
+						insertHd(data)
+					}
+					
+				})
+			}
+			)
+
+			btAddImg.addEventListener('click', () => {
+				addMenuDiv.innerHTML = `
+					<form class="form">
+						<input type="text" class="form-control" name="name" placeholder="img_labXX_winXX_debXX_..." required>
+						<p></p>
+						<input type="text" class="form-control" name="size" placeholder="XX,X GB ..." required>
+						<p></p>
+						<input type="text" class="form-control" name="tag" placeholder="SG-XX ..." required>
+						<p></p>
+						<input type="text" class="form-control mr-2" name="date" placeholder="DD-MM-AAAA" required>
+						<p></p>
+						<input type="submit" class="btn btn-outline-success " name="insertImg" value="Adicionar"></input>
+					</form>
+				`
+
+				checkTheme()
+
+				var btInsertImg = document.querySelector('input[name=insertImg')
+				btInsertImg.addEventListener('click', (event) => {
+
+					var imgForm = document.querySelector('form')
+					if (imgForm.checkValidity()) {
+						event.preventDefault()
+
+						let data = {
+							"Name": document.querySelector('input[name=name]').value,
+							"Size": document.querySelector('input[name=size]').value,
+							"Local": document.querySelector('input[name=tag]').value,
+							"Date": document.querySelector('input[name=date]').value,
+						}
+
+						insertImg(data)
+
+					}
+
+				})
+			})
+
+
+
+		})
+
+		var btRemove = document.querySelector('input[name=Rem]')
+		btRemove.addEventListener('click', (event) => {
+			event.preventDefault()
+			window.location = 'remove.html'
+		})
+
+		var btSearch = document.querySelector('input[name=Search]')
+		btSearch.addEventListener('click', (event) => {
+			event.preventDefault()
+			window.location = 'search.html'
+		})
+
+	</script>
+
+
+	<!-- Footer -->
+	<footer class="footer">
+		<!-- Copyright -->
+		<div class="footer-copyright text-muted text-center pb-3">
+			<span>Copyright 2020 &COPY;CMSTI-JP</span>
+			</br>
+			<span>Powered by <a href="https://facebook.com/angeloplacebo/">@angeloplacebo</a></span>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+
+</html>
