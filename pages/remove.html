@@ -61,7 +61,7 @@
                 <div class="input-group-prepend">
                     <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" id="btn_filter"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter"></i></button>
-                    <div class="dropdown-menu">
+                    <div id="dd" class="dropdown-menu">
                         <div class="switch custom-switch">
                             <input type="checkbox" class="custom-control-input" onchange="toggle('hd')" id="hd">
                             <label class="custom-control-label" for="hd">HD</label>
@@ -111,5 +111,10 @@
         crossorigin="anonymous"></script>
 
 </body>
-
+<script>
+    var dropdown = document.getElementById('dd')
+    dropdown.addEventListener('click', (event)=>{
+        event.stopPropagation()
+    })
+</script>
 </html>
