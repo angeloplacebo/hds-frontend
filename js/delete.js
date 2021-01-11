@@ -140,7 +140,7 @@ function bothTable(hds, imgbkp) {
                 <td>${item.SN}</td>
                 <td>${item.Capacidade}</td>
                 <td>${item.Fabricante} : ${item.Modelo}</td>
-                <td><a href="#" onclick="del_confirm(${item._id},'${item.TAG}','hd') "><i class=\"far fa-trash-alt\"></i></a></td>
+                <td><a href="#" onclick="del_confirm('${item._id}','${item.TAG}','hd') "><i class=\"far fa-trash-alt\"></i></a></td>
             </tr>`;
     i++;
   });
@@ -166,7 +166,7 @@ function bothTable(hds, imgbkp) {
             <td>${item.Size}</td>
             <td>${item.Local}</td>
             <td>${item.Date}</td>
-            <td><a href="#" onclick="del_confirm(${item._id},'${item.Name}','imgbkp') "><i class=\"far fa-trash-alt\"></i></a></td>
+            <td><a href="#" onclick="del_confirm('${item._id}','${item.Name}','imgbkp') "><i class=\"far fa-trash-alt\"></i></a></td>
             </tr>`;
     i++;
   });
