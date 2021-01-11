@@ -111,5 +111,11 @@
         crossorigin="anonymous"></script>
 
 </body>
+<script>
+    var dropdown = document.getElementById('dd')
+    dropdown.addEventListener('click', (event)=>{
+        event.stopPropagation()
+    })
+</script>
 
 </html>
